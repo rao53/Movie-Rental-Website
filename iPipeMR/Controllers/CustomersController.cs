@@ -27,7 +27,7 @@ namespace iPipeMR.Controllers
         public ViewResult Index()
         {
 /*Note that .Include is used here to ensure that all related objects with customer are queried when this object is to be displayed in the view*/
-            var customers = _context.Customers.Include(c => c.MembershipType);
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 /*
  It should be noted that we can immediately execute a query on this method by doing the below
             var customers = _context.Customers.toList();
@@ -39,7 +39,7 @@ namespace iPipeMR.Controllers
         public ActionResult Details(int id)
         {
 /*Note that our query is immediately executed here due to the single or default method attached to it*/
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
