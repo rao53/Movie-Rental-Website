@@ -1,0 +1,29 @@
+﻿@model IEnumerable<iPipeMR.Models.Customer>
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@if (!Model.Any())
+{
+    <p>No one has rented this movie before.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customers</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name, "Details", new {id = customer.Id}, null)</td>
+                </tr>
+            }
+        </tbody>   
+    </table>
+}
