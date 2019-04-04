@@ -32,7 +32,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -210,6 +210,18 @@
     <Compile Include="Migrations\201904041356571_PopulateGenreTypes.Designer.cs">
       <DependentUpon>201904041356571_PopulateGenreTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904041720554_ChangedCustomerNameReq.cs" />
+    <Compile Include="Migrations\201904041720554_ChangedCustomerNameReq.Designer.cs">
+      <DependentUpon>201904041720554_ChangedCustomerNameReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904041747121_ChangedCustomerNameReq1.cs" />
+    <Compile Include="Migrations\201904041747121_ChangedCustomerNameReq1.Designer.cs">
+      <DependentUpon>201904041747121_ChangedCustomerNameReq1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904041752470_AddedStuffToCustomer.cs" />
+    <Compile Include="Migrations\201904041752470_AddedStuffToCustomer.Designer.cs">
+      <DependentUpon>201904041752470_AddedStuffToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -220,6 +232,7 @@
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CustomerFormViewModel.cs" />
     <Compile Include="ViewModel\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +298,7 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,6 +343,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904041356571_PopulateGenreTypes.resx">
       <DependentUpon>201904041356571_PopulateGenreTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041720554_ChangedCustomerNameReq.resx">
+      <DependentUpon>201904041720554_ChangedCustomerNameReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041747121_ChangedCustomerNameReq1.resx">
+      <DependentUpon>201904041747121_ChangedCustomerNameReq1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041752470_AddedStuffToCustomer.resx">
+      <DependentUpon>201904041752470_AddedStuffToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

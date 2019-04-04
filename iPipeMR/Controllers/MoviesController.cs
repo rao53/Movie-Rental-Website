@@ -49,7 +49,7 @@ namespace iPipeMR.Controllers
         }
 
         // contains list of movies
-        public ViewResult Index()
+        public ViewResult Index() 
         {
             var movies = _context.Movies.Include(m => m.Genre).ToList();
 

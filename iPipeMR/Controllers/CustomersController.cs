@@ -6,12 +6,14 @@ using System.Web.Mvc;
 using iPipeMR.Models;
 using iPipeMR.ViewModel;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace iPipeMR.Controllers
 {
     public class CustomersController : Controller
     {
-        private ApplicationDbContext _context;
+        public ApplicationDbContext _context;
 
         public CustomersController()
         {
@@ -21,6 +23,57 @@ namespace iPipeMR.Controllers
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
+        }
+
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View("CustomerForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(CustomerFormViewModel customer) 
+        {
+            /*Checking if its a new customer*/
+            if (customer.Customers.Id == 0)
+            {
+                _context.Customers.Add(customer.Customers);  /*Doing this is just being added to the memory*/
+            }
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Customers.Id);
+                customerInDb.Name = customer.Customers.Name;
+                customerInDb.Birthdate = customer.Customers.Birthdate;
+                customerInDb.MembershipTypeId = customer.Customers.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.Customers.IsSubscribedToNewsLetter;
+
+                //Mapper.map(customer, customerInDb); /*Another way to update the properties#1#
+
+
+                /*TryUpdateModel(customerInDb);#1#
+                /*You can use this approach to update the database based on given ID. We don't like this because of security where this allows us to blindly update all properties to the database*/
+
+                
+            }
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Customers");
         }
 
         // GET: Customers
@@ -45,6 +98,22 @@ namespace iPipeMR.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customers = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
         }
     }
 }
