@@ -34,8 +34,8 @@ namespace iPipeMR.Controllers
             };
             return View("CustomerForm", viewModel);
         }
-
-        [HttpPost]
+         
+        [HttpPost] 
         public ActionResult Save(CustomerFormViewModel customer) 
         {
             /*Checking if its a new customer*/

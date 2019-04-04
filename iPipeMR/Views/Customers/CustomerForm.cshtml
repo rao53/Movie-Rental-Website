@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm("Save", "Customers"))
 {
-    <div class="form-group">
+    <div class="form-group"> 
         @Html.LabelFor(m => m.Customers.Name)
         @Html.TextBoxFor(m=>m.Customers.Name, new {@class="form-control"})
     </div>
