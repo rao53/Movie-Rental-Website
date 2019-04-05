@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace iPipeMR.Models
-{
+{ 
     public class Customer
     {
         public int Id { get; set; }
@@ -22,6 +22,7 @@ namespace iPipeMR.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
         
