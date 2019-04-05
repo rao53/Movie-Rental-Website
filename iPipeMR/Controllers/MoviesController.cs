@@ -11,7 +11,6 @@ namespace iPipeMR.Controllers
 {
     public class MoviesController : Controller
     {
-        
         private ApplicationDbContext _context;
 
         public MoviesController()
