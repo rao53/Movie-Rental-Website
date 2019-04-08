@@ -17,7 +17,7 @@ namespace iPipeMR.App_Start
             Mapper.CreateMap<Movie, MovieDto>();
             
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
-            //Mapper.CreateMap<Movie, MovieDto>();
+            Mapper.CreateMap<Genres, GenreDto>();
 
 
 
