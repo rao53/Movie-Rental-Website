@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using iPipeMR.Dtos;
 using iPipeMR.Models;
+using System.Data.Entity;
 using iPipeMR.ViewModel;
 
 namespace iPipeMR.Controllers.Api
@@ -23,7 +24,10 @@ namespace iPipeMR.Controllers.Api
         //Get /api/customers
         public IHttpActionResult GetCustomers()
         {
-            var customerDtos = _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDto>);
+            var customerDtos = _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer,CustomerDto>);
             return Ok(customerDtos);
         }
 

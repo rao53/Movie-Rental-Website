@@ -94,13 +94,13 @@ namespace iPipeMR.Controllers
         public ViewResult Index()
         {
 /*Note that .Include is used here to ensure that all related objects with customer are queried when this object is to be displayed in the view*/
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            //var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 /*
  It should be noted that we can immediately execute a query on this method by doing the below
             var customers = _context.Customers.toList();
 */
 
-            return View(customers);
+            return View();
         }
 
         public ActionResult Details(int id)
