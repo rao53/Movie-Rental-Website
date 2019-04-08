@@ -8,6 +8,7 @@ using AutoMapper;
 using iPipeMR.Dtos;
 using iPipeMR.Models;
 using System.Data.Entity;
+using System.Web.Security;
 
 namespace iPipeMR.Controllers.Api
 {
@@ -40,6 +41,7 @@ namespace iPipeMR.Controllers.Api
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]   
         public IHttpActionResult CreateMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -54,6 +56,7 @@ namespace iPipeMR.Controllers.Api
         }
 
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace iPipeMR.Controllers.Api
         }
 
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult DeleteMovie(int id)
         {
             var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);

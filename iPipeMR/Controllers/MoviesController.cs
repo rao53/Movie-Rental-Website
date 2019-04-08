@@ -23,6 +23,8 @@ namespace iPipeMR.Controllers
             _context.Dispose();
         }
 
+        //It should be noted that this overrides the authorize filter that was placed in the filterconfig file
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ViewResult New()
         {
             var genres = _context.Genres.ToList();
@@ -54,6 +56,7 @@ namespace iPipeMR.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
@@ -74,8 +77,11 @@ namespace iPipeMR.Controllers
         public ViewResult Index() 
         {
             //var movies = _context.Movies.Include(m => m.Genre).ToList();
-
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+            {
+                return View("List");
+            }
+            return View("ReadOnlyList");
         } 
         
         public ActionResult Details(int id)
@@ -92,6 +98,7 @@ namespace iPipeMR.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using iPipeMR.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace iPipeMR.Controllers
 {
@@ -151,10 +152,22 @@ namespace iPipeMR.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    DrivingLicense = model.DrivingLicence  //This allows the domain model to be sent when we click the register action button
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Temporary code
+                    /*var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
+
+                    await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");*/
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -191,7 +204,7 @@ namespace iPipeMR.Controllers
         public ActionResult ForgotPassword()
         {
             return View();
-        }
+        } 
 
         //
         // POST: /Account/ForgotPassword
