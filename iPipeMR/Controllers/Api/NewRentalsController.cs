@@ -11,7 +11,7 @@ namespace iPipeMR.Controllers.Api
 {
     public class NewRentalsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private ApplicationDbContext _context; 
 
         public NewRentalsController()
         {
