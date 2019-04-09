@@ -14,7 +14,8 @@ namespace iPipeMR
                         "~/scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
-                        "~/Scripts/datatables/datatables.bootstap.js"
+                        "~/Scripts/datatables/datatables.bootstap.js",
+                        "~/Scripts/typeahead.bundle.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,7 +29,8 @@ namespace iPipeMR
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css"
+                      "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/typeahead.css"
                       ));
         }
     }
