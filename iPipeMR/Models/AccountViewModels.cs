@@ -13,6 +13,10 @@ namespace iPipeMR.Models
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string Phone { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -72,6 +76,10 @@ namespace iPipeMR.Models
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicence { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string Phone { get; set; }
 
         [Required]
         [EmailAddress]
