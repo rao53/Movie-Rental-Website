@@ -22,12 +22,21 @@ namespace iPipeMR.Controllers.Api
         }
 
         //Get /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            var customerDtos = _context.Customers
-                .Include(c => c.MembershipType)
+            var customersQuery = _context
+                .Customers //Here, we are making customer Dto an Iqueryable object, we apply a filter, then call tolist() to execute it.
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrEmpty(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var customerDtos = customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer,CustomerDto>);
+
             return Ok(customerDtos);
         }
 
