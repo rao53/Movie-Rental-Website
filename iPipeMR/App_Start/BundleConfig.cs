@@ -32,7 +32,8 @@ namespace iPipeMR
                       "~/Content/site.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/typeahead.css",
-                      "~/Content/toastr.css"
+                      "~/Content/toastr.css",
+                      "~/Content/css/one-page-wonder.min.css"
                       ));
         }
     }
