@@ -13,7 +13,7 @@ namespace iPipeMR.Controllers
     {
         private ApplicationDbContext _context;
 
-        public MoviesController()
+        public MoviesController() 
         {
             _context = new ApplicationDbContext();
         }
