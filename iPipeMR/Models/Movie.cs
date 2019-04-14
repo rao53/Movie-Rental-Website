@@ -16,13 +16,13 @@ namespace iPipeMR.Models
 
         public Genres Genre { get; set; }
 
-        [Display(Name = "Genre")]
+        [Display(Name = "Genre*")]
         [Required]
         public byte GenreId { get; set; }
 
         public DateTime DateAdded { get; set; }
 
-        [Display(Name = "Release Date")]
+        [Display(Name = "Release Date*")]
         [Required]
         public DateTime ReleaseDate { get; set; }
 

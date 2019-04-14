@@ -4,18 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Customer</h2>
+<br />
+<h2>New Customer<small class="absolute">
+    *(Required)
+</small></h2>
 
 @using (Html.BeginForm("Save", "Customers"))
 {
     @Html.ValidationSummary(true, "Please, fix the below errors.")
     <div class="form-group"> 
-        @Html.LabelFor(m => m.Customers.Name)
+        @Html.LabelFor(m => m.Customers.Name, "Name*")
         @Html.TextBoxFor(m=>m.Customers.Name, new {@class="form-control"})
         @Html.ValidationMessageFor(m=>m.Customers.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Customers.MembershipTypeId)
+        @Html.LabelFor(m => m.Customers.MembershipTypeId, "Membership Type*")
         @Html.DropDownListFor(m => m.Customers.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Customers.MembershipTypeId)
     </div>
